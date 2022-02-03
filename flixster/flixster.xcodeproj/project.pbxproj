@@ -16,6 +16,8 @@
 		163E751927A7813100DF2E36 /* flixsterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163E751827A7813100DF2E36 /* flixsterUITests.swift */; };
 		163E751B27A7813100DF2E36 /* flixsterUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163E751A27A7813100DF2E36 /* flixsterUITestsLaunchTests.swift */; };
 		163E752A27A798A300DF2E36 /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163E752927A798A200DF2E36 /* MoviesViewController.swift */; };
+		16B26F9527AB7FB000AC7028 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B26F9427AB7FB000AC7028 /* MovieCell.swift */; };
+		16B26F9827AB899B00AC7028 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = 16B26F9727AB899B00AC7028 /* AlamofireImage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,7 @@
 		163E751827A7813100DF2E36 /* flixsterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = flixsterUITests.swift; sourceTree = "<group>"; };
 		163E751A27A7813100DF2E36 /* flixsterUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = flixsterUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		163E752927A798A200DF2E36 /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
+		16B26F9427AB7FB000AC7028 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16B26F9827AB899B00AC7028 /* AlamofireImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,6 +110,7 @@
 				163E750227A7813100DF2E36 /* LaunchScreen.storyboard */,
 				163E750527A7813100DF2E36 /* Info.plist */,
 				163E752927A798A200DF2E36 /* MoviesViewController.swift */,
+				16B26F9427AB7FB000AC7028 /* MovieCell.swift */,
 			);
 			path = flixster;
 			sourceTree = "<group>";
@@ -143,6 +148,9 @@
 			dependencies = (
 			);
 			name = flixster;
+			packageProductDependencies = (
+				16B26F9727AB899B00AC7028 /* AlamofireImage */,
+			);
 			productName = flixster;
 			productReference = 163E74F427A7812F00DF2E36 /* flixster.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +223,9 @@
 				Base,
 			);
 			mainGroup = 163E74EB27A7812F00DF2E36;
+			packageReferences = (
+				16B26F9627AB899B00AC7028 /* XCRemoteSwiftPackageReference "AlamofireImage" */,
+			);
 			productRefGroup = 163E74F527A7812F00DF2E36 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -260,6 +271,7 @@
 			files = (
 				163E74F827A7812F00DF2E36 /* AppDelegate.swift in Sources */,
 				163E74FA27A7812F00DF2E36 /* SceneDelegate.swift in Sources */,
+				16B26F9527AB7FB000AC7028 /* MovieCell.swift in Sources */,
 				163E752A27A798A300DF2E36 /* MoviesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -604,6 +616,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		16B26F9627AB899B00AC7028 /* XCRemoteSwiftPackageReference "AlamofireImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/AlamofireImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		16B26F9727AB899B00AC7028 /* AlamofireImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 16B26F9627AB899B00AC7028 /* XCRemoteSwiftPackageReference "AlamofireImage" */;
+			productName = AlamofireImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 163E74EC27A7812F00DF2E36 /* Project object */;
 }
