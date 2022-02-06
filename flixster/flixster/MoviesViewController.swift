@@ -34,10 +34,6 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                  
                     self.movies = dataDictionary["results"] as! [[String:Any]]
                     self.tableView.reloadData()
-                    // TODO: Get the array of movies
-                    // TODO: Store the movies in a property to use elsewhere
-                    // TODO: Reload your table view data
-
              }
         }
         task.resume()
@@ -45,10 +41,12 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // Determines how many rows in the table
         return movies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // Defines what is displayed in each cell or row, where the index of the given cell is given through indexPath
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell") as! MovieCell
         
         let movie = movies[indexPath.row]
@@ -65,6 +63,25 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         cell.posterView.af.setImage(withURL: posterUrl!)
         
         return cell
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination
+        // Pass the selected object to the new view controller.
+        print("Passing details onwards.")
+        
+        // Find selected movie
+        let cell = sender as! UITableViewCell
+        let indexPath = tableView.indexPath(for: cell)!
+        let movie = movies[indexPath.row]
+        
+        // Pass movie dictionary to MovieDetailsViewController
+        let detailsViewController = segue.destination as! MovieDetailsViewController
+        detailsViewController.movie = movie
+        
+        // Remove the highlighted selection
+        tableView.deselectRow(at: indexPath, animated: true)
+        
     }
     
 }
