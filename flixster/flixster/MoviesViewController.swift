@@ -22,7 +22,8 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         
         // Any additional setup after loading the view
         
-        let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed")!
+        // Get the superhero movie data for movies that are similar to Wonder Women (id = 297762) from the API endpoints
+        let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=5766b4fa8a6980ba5b2e528f85f35b9f")!
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
         let task = session.dataTask(with: request) { (data, response, error) in

@@ -19,6 +19,7 @@
 		1645DB3727B037660007C603 /* MovieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1645DB3627B037660007C603 /* MovieDetailsViewController.swift */; };
 		1645DB3927B04A850007C603 /* MovieGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1645DB3827B04A850007C603 /* MovieGridViewController.swift */; };
 		1645DB3B27B20EC60007C603 /* MovieGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1645DB3A27B20EC60007C603 /* MovieGridCell.swift */; };
+		1645DB4127B352AC0007C603 /* MovieGridDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1645DB4027B352AC0007C603 /* MovieGridDetailsViewController.swift */; };
 		16B26F9527AB7FB000AC7028 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B26F9427AB7FB000AC7028 /* MovieCell.swift */; };
 		16B26F9827AB899B00AC7028 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = 16B26F9727AB899B00AC7028 /* AlamofireImage */; };
 /* End PBXBuildFile section */
@@ -57,6 +58,7 @@
 		1645DB3627B037660007C603 /* MovieDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewController.swift; sourceTree = "<group>"; };
 		1645DB3827B04A850007C603 /* MovieGridViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridViewController.swift; sourceTree = "<group>"; };
 		1645DB3A27B20EC60007C603 /* MovieGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridCell.swift; sourceTree = "<group>"; };
+		1645DB4027B352AC0007C603 /* MovieGridDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridDetailsViewController.swift; sourceTree = "<group>"; };
 		16B26F9427AB7FB000AC7028 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,6 +114,7 @@
 				163E74F727A7812F00DF2E36 /* AppDelegate.swift */,
 				163E74F927A7812F00DF2E36 /* SceneDelegate.swift */,
 				163E74FD27A7812F00DF2E36 /* Main.storyboard */,
+				1645DB4027B352AC0007C603 /* MovieGridDetailsViewController.swift */,
 				163E750027A7813100DF2E36 /* Assets.xcassets */,
 				163E750227A7813100DF2E36 /* LaunchScreen.storyboard */,
 				163E750527A7813100DF2E36 /* Info.plist */,
@@ -280,6 +283,7 @@
 			files = (
 				1645DB3727B037660007C603 /* MovieDetailsViewController.swift in Sources */,
 				163E74F827A7812F00DF2E36 /* AppDelegate.swift in Sources */,
+				1645DB4127B352AC0007C603 /* MovieGridDetailsViewController.swift in Sources */,
 				163E74FA27A7812F00DF2E36 /* SceneDelegate.swift in Sources */,
 				16B26F9527AB7FB000AC7028 /* MovieCell.swift in Sources */,
 				163E752A27A798A300DF2E36 /* MoviesViewController.swift in Sources */,

@@ -32,7 +32,8 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
 
         // Do any additional setup after loading the view.
         
-        let url = URL(string: "https://api.themoviedb.org/3/movie/297762/similar?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed")!
+        // Get the superhero movie data for movies that are similar to Wonder Women (id = 297762) from the API endpoints
+        let url = URL(string: "https://api.themoviedb.org/3/movie/297762/similar?api_key=5766b4fa8a6980ba5b2e528f85f35b9f")!
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
         let task = session.dataTask(with: request) { (data, response, error) in
@@ -43,7 +44,8 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
                     let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
                  
                     self.superheroMovies = dataDictionary["results"] as! [[String:Any]]
-                 
+                    
+                    // Reload the collection with the data that has arrived.
                     self.collectionView.reloadData()
              }
         }
@@ -72,8 +74,25 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
         return cell
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination
+        // Pass the selected object to the new view controller.
+        
+        // Find selected movie
+        let cell = sender as! UICollectionViewCell
+        let indexPath = collectionView.indexPath(for: cell)!
+        let superHeroMovie = superheroMovies[indexPath.item]
+        
+        // Pass movie dictionary to MoviesGridDetailsViewController
+        let gridDetailsViewController = segue.destination as! MovieGridDetailsViewController
+        
+        gridDetailsViewController.superHeroMovie = superHeroMovie
+        
+//        // Remove the highlighted selection
+//        collectionView.deselectRow(at: indexPath, animated: true)
+//
+    }
     
-
     /*
     // MARK: - Navigation
 
