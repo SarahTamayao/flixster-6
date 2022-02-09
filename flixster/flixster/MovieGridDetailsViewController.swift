@@ -15,6 +15,7 @@ class MovieGridDetailsViewController: UIViewController {
     @IBOutlet weak var posterView: UIImageView!
     @IBOutlet weak var backdropView: UIImageView!
     
+    
     var superHeroMovie: [String: Any]!
     
     override func viewDidLoad() {
@@ -31,7 +32,7 @@ class MovieGridDetailsViewController: UIViewController {
         let posterUrl = URL(string: posterbaseUrl + posterPath)
         
         let backdropbaseUrl = "https://image.tmdb.org/t/p/w780"
-        let backdropPath = movie["backdrop_path"] as! String
+        let backdropPath = superHeroMovie["backdrop_path"] as! String
         let backdropUrl = URL(string: backdropbaseUrl + backdropPath)
         
         backdropView.af.setImage(withURL: backdropUrl!)
@@ -40,6 +41,9 @@ class MovieGridDetailsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+//    @IBAction func didTapPoster(_ sender: UITapGestureRecognizer) {
+//        performSegue(withIdentifier: "MovieTrailerViewController", sender: sender)
+//    }
 
     /*
     // MARK: - Navigation
@@ -50,5 +54,6 @@ class MovieGridDetailsViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
 
 }
