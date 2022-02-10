@@ -7,12 +7,13 @@
 
 import UIKit
 import AlamofireImage
+import SwiftyJSON
 
 class MovieGridViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var superheroMovies = [[String:Any]]()
+    var superheroMovies = [MovieDetails]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,17 +37,27 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
         let url = URL(string: "https://api.themoviedb.org/3/movie/297762/similar?api_key=5766b4fa8a6980ba5b2e528f85f35b9f")!
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
-        let task = session.dataTask(with: request) { (data, response, error) in
+        let task = session.dataTask(with: request) { (dataFromNetworking, response, error) in
              // This will run when the network request returns
              if let error = error {
                     print(error.localizedDescription)
-             } else if let data = data {
-                    let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+             } else if let dataFromNetworking = dataFromNetworking {
                  
-                    self.superheroMovies = dataDictionary["results"] as! [[String:Any]]
-                    
-                    // Reload the collection with the data that has arrived.
-                    self.collectionView.reloadData()
+                 do {
+                     let dataDictionary = try JSON(data: dataFromNetworking)
+                     
+                     for singleMovie in dataDictionary["results"] {
+                         let movieData = singleMovie.1
+                         self.superheroMovies.append(MovieDetails.init(json: movieData))
+                     }
+                     
+                     // Reload the collection with the data that has arrived.
+                     self.collectionView.reloadData()
+                     
+                 } catch {
+                     // Couldn't read in the JSON data correctly
+                     print(error.localizedDescription)
+                 }
              }
         }
         task.resume()
@@ -64,12 +75,8 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieGridCell", for: indexPath) as! MovieGridCell
         
         let movie = superheroMovies[indexPath.item]
-        
-        let baseUrl = "https://image.tmdb.org/t/p/w185"
-        let posterPath = movie["poster_path"] as! String
-        let posterUrl = URL(string: baseUrl + posterPath)
-        
-        cell.posterView.af.setImage(withURL: posterUrl!)
+
+        cell.posterView.af.setImage(withURL: movie.posterURL!)
         
         return cell
     }
@@ -83,14 +90,12 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
         let indexPath = collectionView.indexPath(for: cell)!
         let superHeroMovie = superheroMovies[indexPath.item]
         
+        
         // Pass movie dictionary to MoviesGridDetailsViewController
         let gridDetailsViewController = segue.destination as! MovieGridDetailsViewController
         
         gridDetailsViewController.superHeroMovie = superHeroMovie
         
-//        // Remove the highlighted selection
-//        collectionView.deselectRow(at: indexPath, animated: true)
-//
     }
     
     /*

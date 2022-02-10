@@ -249,6 +249,7 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YG3-SM-Yj6">
                                 <rect key="frame" x="0.0" y="88" width="414" height="300"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="oOp-Am-JF4"/>
                                 </constraints>
@@ -261,7 +262,7 @@
                                     <constraint firstAttribute="width" constant="100" id="YBG-xF-DBo"/>
                                 </constraints>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="UZU-7v-Rww" appends="YES" id="fx4-Wi-MVm"/>
+                                    <outletCollection property="gestureRecognizers" destination="UZU-7v-Rww" appends="YES" id="4R1-cz-LLB"/>
                                 </connections>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eJ9-ny-o3o">
@@ -279,6 +280,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="799-wP-t8V"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="799-wP-t8V" firstAttribute="trailing" secondItem="VPL-Ng-uxC" secondAttribute="trailing" constant="10" id="A7D-D6-udz"/>
                             <constraint firstItem="6O6-Jh-ouz" firstAttribute="top" secondItem="799-wP-t8V" secondAttribute="top" constant="228" id="AIC-lX-yZJ"/>
@@ -318,16 +320,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TESTING" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yHm-rn-idw">
-                                <rect key="frame" x="205" y="226" width="70" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3aV-gE-iL0">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="8nT-7D-SU6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="3aV-gE-iL0" secondAttribute="bottom" id="RMI-Ut-gvX"/>
+                            <constraint firstItem="3aV-gE-iL0" firstAttribute="leading" secondItem="8nT-7D-SU6" secondAttribute="leading" id="Yxw-X0-2fc"/>
+                            <constraint firstItem="3aV-gE-iL0" firstAttribute="trailing" secondItem="8nT-7D-SU6" secondAttribute="trailing" id="kk8-MV-ZTo"/>
+                            <constraint firstItem="3aV-gE-iL0" firstAttribute="top" secondItem="8nT-7D-SU6" secondAttribute="top" id="sqM-2X-7Y3"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tyc-bf-32R" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

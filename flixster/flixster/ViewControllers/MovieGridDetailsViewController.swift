@@ -8,42 +8,43 @@
 import UIKit
 import AlamofireImage
 
-class MovieGridDetailsViewController: UIViewController {
+class MovieGridDetailsViewController: UIViewController, UIGestureRecognizerDelegate{
 
     @IBOutlet weak var synopsisLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var posterView: UIImageView!
     @IBOutlet weak var backdropView: UIImageView!
     
-    
-    var superHeroMovie: [String: Any]!
+    var movieVideos = [[String: Any]]()
+    var superHeroMovie: MovieDetails!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let title = superHeroMovie["title"] as! String
-        let synopsis = superHeroMovie["overview"] as! String
+        let title = superHeroMovie.title!
+        let synopsis = superHeroMovie.synopsis!
         
         titleLabel.text = title
         synopsisLabel.text = synopsis
         
-        let posterbaseUrl = "https://image.tmdb.org/t/p/w185"
-        let posterPath = superHeroMovie["poster_path"] as! String
-        let posterUrl = URL(string: posterbaseUrl + posterPath)
+        backdropView.af.setImage(withURL: superHeroMovie.backDropURL!)
+        posterView.af.setImage(withURL: superHeroMovie.posterURL!)
         
-        let backdropbaseUrl = "https://image.tmdb.org/t/p/w780"
-        let backdropPath = superHeroMovie["backdrop_path"] as! String
-        let backdropUrl = URL(string: backdropbaseUrl + backdropPath)
-        
-        backdropView.af.setImage(withURL: backdropUrl!)
-        posterView.af.setImage(withURL: posterUrl!)
-
+        posterView.isUserInteractionEnabled = true
         // Do any additional setup after loading the view.
     }
     
-//    @IBAction func didTapPoster(_ sender: UITapGestureRecognizer) {
-//        performSegue(withIdentifier: "MovieTrailerViewController", sender: sender)
-//    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination
+        // Pass the selected object to the new view controller.
+        let movieID = superHeroMovie.movieID!
+        
+        let movieTrailerViewController = segue.destination as! MovieTrailerViewController
+        movieTrailerViewController.movieID = String(movieID)
+        
+    }
+}
 
     /*
     // MARK: - Navigation
@@ -54,6 +55,4 @@ class MovieGridDetailsViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    
 
-}

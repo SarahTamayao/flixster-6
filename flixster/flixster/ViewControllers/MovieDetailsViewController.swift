@@ -7,6 +7,8 @@
 
 import UIKit
 import AlamofireImage
+import SwiftyJSON
+
 
 class MovieDetailsViewController: UIViewController {
 
@@ -15,27 +17,19 @@ class MovieDetailsViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var synopsisLabel: UILabel!
     
-    var movie: [String: Any]!
+    var movie: MovieDetails!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let title = movie["title"] as! String
-        let synopsis = movie["overview"] as! String
+        let title = movie.title!
+        let synopsis = movie.synopsis!
         
         titleLabel.text = title
         synopsisLabel.text = synopsis
-        
-        let posterbaseUrl = "https://image.tmdb.org/t/p/w185"
-        let posterPath = movie["poster_path"] as! String
-        let posterUrl = URL(string: posterbaseUrl + posterPath)
-        
-        let backdropbaseUrl = "https://image.tmdb.org/t/p/w780"
-        let backdropPath = movie["backdrop_path"] as! String
-        let backdropUrl = URL(string: backdropbaseUrl + backdropPath)
-        
-        backdropView.af.setImage(withURL: backdropUrl!)
-        posterView.af.setImage(withURL: posterUrl!)
+
+        backdropView.af.setImage(withURL: movie.backDropURL!)
+        posterView.af.setImage(withURL: movie.posterURL!)
 
         // Do any additional setup after loading the view.
     }
