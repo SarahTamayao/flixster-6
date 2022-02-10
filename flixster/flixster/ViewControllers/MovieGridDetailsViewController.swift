@@ -20,8 +20,9 @@ class MovieGridDetailsViewController: UIViewController, UIGestureRecognizerDeleg
     
     // MARK: - View Life Cycle
     
-    var movieVideos = [[String: Any]]()
+//    var movieVideos = [[String: Any]]()
     var superHeroMovie: MovieDetails!
+    var dialogMessage: UIAlertController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +38,15 @@ class MovieGridDetailsViewController: UIViewController, UIGestureRecognizerDeleg
         
         // Ensures gesture can be registered
         posterView.isUserInteractionEnabled = true
+        
+        // Create new Alert when no YouTube trailer found
+        dialogMessage = UIAlertController(title: "Alert", message: "No YouTube Trailer Found", preferredStyle: .alert)
+        
+        // Create OK button with action handler
+        let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in return})
+        
+        //Add OK button to a dialog message
+        dialogMessage.addAction(ok)
     }
     
     // MARK: - IBActions
@@ -56,16 +66,20 @@ class MovieGridDetailsViewController: UIViewController, UIGestureRecognizerDeleg
                     let dataDictionary = try JSON(data: dataFromNetworking)
                     
                     // Grab the first set of data from the API array and convert it into VideosForMovie model
-                    let trailerDetails = VideosForMovie.init(json: dataDictionary["results"][0])
-                
-                    do {
-                        let movieTrailerURL = try trailerDetails.getYoutubeLink()
-                        self.performSegue(withIdentifier: "segueToTrailerController", sender: movieTrailerURL)
+                    // Then, see if it contains a YouTube Trailer
+                    for setOfTrailerDetails in dataDictionary["results"] {
+                        let trailerDetails = VideosForMovie.init(json: setOfTrailerDetails.1)
                         
-                    } catch Error.Failure {
-                        // Either was not a trailer, or the site was not YouTube
-                        print(error!.localizedDescription)
+                        if trailerDetails.trailerSite == "YouTube" && trailerDetails.trailerType == "Trailer" {
+                            let movieTrailerURL = trailerDetails.movieLink!
+                            self.performSegue(withIdentifier: "segueToTrailerController", sender: movieTrailerURL)
+                            break
+                        }
                     }
+                    
+                    // Present Alert since couldn't find a YouTube video
+                    self.present(self.dialogMessage, animated: true, completion: nil)
+                    
                 } catch {
                     // Error in fetching the API endpoint data
                     print(error.localizedDescription)

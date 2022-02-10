@@ -46,32 +46,13 @@ struct VideosForMovie {
     var trailerKey: String?
     var trailerSite: String?
     var trailerType: String?
-    var movieLink: String!
+    var movieLink: URL?
     
     init(json: JSON){
         trailerKey = json["key"].stringValue
         trailerSite = json["site"].stringValue
         trailerType = json["type"].stringValue
-        movieLink = "https://www.youtube.com/watch?v=" + self.trailerKey!
-    }
-    
-    func getYoutubeLink() throws -> URL{
-        guard self.trailerSite == "YouTube" else {
-            throw Error.Failure
-        }
-        
-        guard self.trailerType == "Trailer" else {
-            throw Error.Failure
-        }
-        
-        return URL(string: self.movieLink)!
+        movieLink = URL(string: "https://www.youtube.com/watch?v=" + self.trailerKey!)
     }
 }
 
-// MARK: - Custom errors mdae for VideoDetails
-
-enum Error: String, LocalizedError {
-    case Failure = "Unable to generate YouTube link."
-    
-    var errorDescription: String? { self.rawValue }
-}

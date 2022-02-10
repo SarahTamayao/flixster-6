@@ -22,6 +22,7 @@ class MovieDetailsViewController: UIViewController {
     // MARK: - View Life Cycle
     
     var movie: MovieDetails!
+    var dialogMessage: UIAlertController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +38,15 @@ class MovieDetailsViewController: UIViewController {
         
         // Ensures gesture can be registered
         posterView.isUserInteractionEnabled = true
+        
+        // Create new Alert when no YouTube trailer found
+        dialogMessage = UIAlertController(title: "Alert", message: "No YouTube Trailer Found", preferredStyle: .alert)
+        
+        // Create OK button with action handler
+        let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in return})
+        
+        //Add OK button to a dialog message
+        dialogMessage.addAction(ok)
     }
 
     // MARK: - IBActions
@@ -61,17 +71,15 @@ class MovieDetailsViewController: UIViewController {
                         let trailerDetails = VideosForMovie.init(json: setOfTrailerDetails.1)
                         
                         if trailerDetails.trailerSite == "YouTube" && trailerDetails.trailerType == "Trailer" {
-                            do {
-                                let movieTrailerURL = try trailerDetails.getYoutubeLink()
-                                self.performSegue(withIdentifier: "segueFromMovieDetails", sender: movieTrailerURL)
-                                
-                            } catch Error.Failure {
-                                // Either was not a trailer, or the site was not YouTube
-                                print("Not a trailer, or not from YouTube")
-                            }
+                            let movieTrailerURL = trailerDetails.movieLink!
+                            self.performSegue(withIdentifier: "segueFromMovieDetails", sender: movieTrailerURL)
                             break
                         }
                     }
+                    
+                    // Present Alert since couldn't find a YouTube video
+                    self.present(self.dialogMessage, animated: true, completion: nil)
+                    
                 } catch {
                     // Error in fetching the API endpoint data
                     print(error.localizedDescription)
