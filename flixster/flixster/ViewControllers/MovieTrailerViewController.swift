@@ -11,7 +11,7 @@ import WebKit
 class MovieTrailerViewController: UIViewController, WKUIDelegate {
     
     var webView: WKWebView!
-    var trailerURL: String!
+    var trailerURL: URL!
     
     override func loadView() {
         let webConfiguration = WKWebViewConfiguration()
@@ -19,36 +19,13 @@ class MovieTrailerViewController: UIViewController, WKUIDelegate {
         webView.uiDelegate = self
         view = webView
     }
-    
-    var movieID: String!
-    var movieVideos = [[String: Any]]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let movieID = movieID!
-        
-        // Get the superhero trailer data for the specified movieID
-        let url = URL(string: "https://api.themoviedb.org/3/movie/\(movieID)/videos?api_key=5766b4fa8a6980ba5b2e528f85f35b9f&language=en-US")!
-        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
-        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
-        let task = session.dataTask(with: request) { (data, response, error) in
-             // This will run when the network request returns
-             if let error = error {
-                    print(error.localizedDescription)
-             } else if let data = data {
-                    let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
-                    self.movieVideos = dataDictionary["results"] as! [[String:Any]]
-                 
-                    let movieTrailerID = self.movieVideos[0]["key"]
-                    let movieTrailerURL = URL(string: "https://www.youtube.com/watch?v=\(movieTrailerID!)")
-                    let myRequest = URLRequest(url: movieTrailerURL!)
-                    self.webView.load(myRequest)
-
-                    //elf.tableView.reloadData()
-             }
-        }
-        task.resume()
-
+        //let movieID = movieID!
+        let trailerURL = trailerURL!
+        let myRequest = URLRequest(url: trailerURL)
+        self.webView.load(myRequest)
         // Do any additional setup after loading the view.
     }
     

@@ -12,7 +12,11 @@ import SwiftyJSON  // https://github.com/SwiftyJSON/SwiftyJSON#why-is-the-typica
 
 class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    // MARK: - IBOutlets
+    
     @IBOutlet weak var tableView: UITableView!
+    
+    // MARK: - View Life Cycle
     
     var movies = [MovieDetails]()
     
@@ -22,9 +26,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.dataSource = self
         tableView.delegate = self
         
-        // Any additional setup after loading the view
-        
-        // Get the superhero movie data for movies that are similar to Wonder Women (id = 297762) from the API endpoints
+        // Get the movies that are now playing
         let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=5766b4fa8a6980ba5b2e528f85f35b9f")!
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
@@ -52,6 +54,8 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
 
     }
     
+    // MARK: - Table Functions
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Determines how many rows in the table
         return movies.count
@@ -65,13 +69,15 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         let title = movie.title!
         let synopsis = movie.synopsis!
         
-        cell.titleLabel.text = title
+        cell.movieTitleLabel.text = title
         cell.synopsisLabel.text = synopsis
         
         cell.posterView.af.setImage(withURL: movie.posterURL!)
         
         return cell
     }
+    
+    // MARK: - Navigation, prepare for segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination
@@ -90,5 +96,4 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.deselectRow(at: indexPath, animated: true)
         
     }
-    
 }

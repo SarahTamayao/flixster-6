@@ -9,6 +9,8 @@ import Foundation
 import SwiftyJSON
 
 
+// MARK: - Model to represent a movie, with paths to a poster and backdrop, and strings containing a summary, title, and a movie ID
+
 struct MovieDetails {
     // Model for an endpoint from https://api.themoviedb.org/3/movie/now_playing?
     
@@ -34,6 +36,10 @@ struct MovieDetails {
         posterURL = URL(string: posterBaseURL + posterPath!)
     }
 }
+
+// MARK: - Model to represent video details given for a movie. Main points are the key, which would be the YouTube video link suffix.
+//         If the site given in the end point is not YouTube, throw an error.
+//         If the type of video given is not a Trailer, throw an error.
 
 struct VideosForMovie {
     // Model for an endpoint from https://api.themoviedb.org/3/movie/297762/similar?
@@ -61,6 +67,8 @@ struct VideosForMovie {
         return URL(string: self.movieLink)!
     }
 }
+
+// MARK: - Custom errors mdae for VideoDetails
 
 enum Error: String, LocalizedError {
     case Failure = "Unable to generate YouTube link."

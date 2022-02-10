@@ -65,9 +65,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="movieTitleLabel" destination="W0r-iM-5QI" id="bq6-gF-qmk"/>
                                             <outlet property="posterView" destination="VQu-sm-Pi8" id="6xi-cm-pU7"/>
                                             <outlet property="synopsisLabel" destination="gf8-rk-6vq" id="lIx-gG-Rvj"/>
-                                            <outlet property="titleLabel" destination="W0r-iM-5QI" id="Coq-pL-UAN"/>
                                             <segue destination="iYN-HD-2fh" kind="show" id="Vfk-4v-XUs"/>
                                         </connections>
                                     </tableViewCell>
@@ -108,10 +108,14 @@
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lCr-bt-Wi3">
                                 <rect key="frame" x="10" y="316" width="101" height="148"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="101" id="KCU-Wh-IMN"/>
                                     <constraint firstAttribute="height" constant="148" id="TeA-z4-nNv"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="UXH-14-bQ2" appends="YES" id="MiO-9d-Bos"/>
+                                </connections>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oy2-KX-xTI">
                                 <rect key="frame" x="119" y="396" width="275" height="26.5"/>
@@ -148,11 +152,17 @@
                         <outlet property="posterView" destination="lCr-bt-Wi3" id="Ik5-zF-Zna"/>
                         <outlet property="synopsisLabel" destination="HiA-VJ-ueo" id="Y3D-Ui-GxP"/>
                         <outlet property="titleLabel" destination="Oy2-KX-xTI" id="9kZ-mW-zFB"/>
+                        <segue destination="g1c-uH-TA0" kind="presentation" identifier="segueFromMovieDetails" id="koL-18-Ihr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8dN-JE-j5d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="UXH-14-bQ2">
+                    <connections>
+                        <action selector="posterTapped:" destination="iYN-HD-2fh" id="qOZ-GR-dx4"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1680" y="-490"/>
+            <point key="canvasLocation" x="1651" y="-490"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Xbq-Ao-njs">
@@ -301,12 +311,13 @@
                         <outlet property="posterView" destination="6O6-Jh-ouz" id="y8y-o9-k96"/>
                         <outlet property="synopsisLabel" destination="VPL-Ng-uxC" id="IK3-IK-ifK"/>
                         <outlet property="titleLabel" destination="eJ9-ny-o3o" id="PF6-fL-ScS"/>
+                        <segue destination="g1c-uH-TA0" kind="presentation" identifier="segueToTrailerController" id="raF-kk-YmK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nMs-h2-wFJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="UZU-7v-Rww">
                     <connections>
-                        <segue destination="g1c-uH-TA0" kind="presentation" id="w3I-4L-5ux"/>
+                        <action selector="posterTapped:" destination="lST-m1-gey" id="OQc-yu-kTg"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -341,7 +352,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tyc-bf-32R" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2510.144927536232" y="174.77678571428569"/>
+            <point key="canvasLocation" x="2580" y="-186"/>
         </scene>
         <!--Now Playing-->
         <scene sceneID="7Zp-xH-e1x">
@@ -387,6 +398,9 @@
             <point key="canvasLocation" x="-271.01449275362319" y="174.77678571428569"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="koL-18-Ihr"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="now_playing_tabbar_item" width="21" height="21"/>
         <image name="superhero_tabbar_item" width="21" height="23"/>

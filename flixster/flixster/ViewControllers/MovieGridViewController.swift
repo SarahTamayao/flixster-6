@@ -11,8 +11,11 @@ import SwiftyJSON
 
 class MovieGridViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
+    // MARK: - IBOutlets
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
+    // MARK: - View Life Cycle
     var superheroMovies = [MovieDetails]()
 
     override func viewDidLoad() {
@@ -29,10 +32,8 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
         
         let width = (view.frame.size.width - (layout.minimumInteritemSpacing * 2)) / 3      // Account for the two vertical dividers
         
-        layout.itemSize = CGSize(width: width, height: width * 3 / 2)
+        layout.itemSize = CGSize(width: width, height: width * 3 / 2)                       // Defines size of each movie grid
 
-        // Do any additional setup after loading the view.
-        
         // Get the superhero movie data for movies that are similar to Wonder Women (id = 297762) from the API endpoints
         let url = URL(string: "https://api.themoviedb.org/3/movie/297762/similar?api_key=5766b4fa8a6980ba5b2e528f85f35b9f")!
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
@@ -63,6 +64,8 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
         task.resume()
     }
     
+    // MARK: - Collection view functions
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // Define the number of items in the collectionView based on number of movies pulled during API request
         return superheroMovies.count
@@ -70,7 +73,7 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        // Send the image URL from the superheroMovies dictionary to the imageView
+        // Send the image URL from the superheroMovies dictionary to the imageView, load the image using Alamofire
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieGridCell", for: indexPath) as! MovieGridCell
         
@@ -80,6 +83,8 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
         
         return cell
     }
+    
+    // MARK: - Navigation, prepare for segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination
@@ -97,15 +102,4 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
         gridDetailsViewController.superHeroMovie = superHeroMovie
         
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
