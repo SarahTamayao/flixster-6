@@ -4,7 +4,6 @@
 //
 //  Created by Giovanni Propersi on 1/30/22.
 //
-// TODO: Add search function.
 
 import UIKit
 import AlamofireImage
