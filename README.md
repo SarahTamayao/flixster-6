@@ -2,7 +2,32 @@
 
 Flix is an app that allows users to browse movies from the [The Movie Database API](http://docs.themoviedb.apiary.io/#).
 
-📝 `NOTE - PASTE PART 2 SNIPPET HERE:` Paste the README template for part 2 of this assignment here at the top. This will show a history of your development process, which users stories you completed and how your app looked and functioned at each step.
+## Flix Part 2
+
+### User Stories
+
+#### REQUIRED (10pts)
+- [X] (5pts) User can tap a cell to see more details about a particular movie.
+- [X] (5pts) User can tap a tab bar button to view a grid layout of Movie Posters using a CollectionView.
+
+#### BONUS
+- [X] (2pts) User can tap a poster in the collection view to see a detail screen of that movie.
+- [X] (2pts) In the detail view, when the user taps the poster, a new screen is presented modally where they can view the trailer.
+- [X] Custom error popups when: the network does not connect you to the API, the API response is not a valid JSON, or the movie does not contain a YouTube trailer.
+
+### App Walkthrough GIF
+
+<img src="https://i.imgur.com/bLY5KOW.gif" width=250><br>
+
+
+This gif shows what happens if the API response does not contain a YouTube trailer, or if the network connection fails.
+<img src="https://i.imgur.com/5DpqRYB.gif" width=250><br>
+
+
+### Notes
+Describe any challenges encountered while building the app.
+
+- [X] Working with gesture recognizers to first load the API request and then segue was a good learning experience.
 
 ---
 
