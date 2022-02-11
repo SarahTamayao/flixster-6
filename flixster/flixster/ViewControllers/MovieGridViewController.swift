@@ -14,6 +14,8 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
     // MARK: - IBOutlets
     
     @IBOutlet weak var collectionView: UICollectionView!
+    var networkErrorMessage: UIAlertController!
+    var apiError: UIAlertController!
     
     // MARK: - View Life Cycle
     var superheroMovies = [MovieDetails]()
@@ -33,6 +35,17 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
         let width = (view.frame.size.width - (layout.minimumInteritemSpacing * 2)) / 3      // Account for the two vertical dividers
         
         layout.itemSize = CGSize(width: width, height: width * 3 / 2)                       // Defines size of each movie grid
+        
+        // Create new Alerts with network error and API data error
+        networkErrorMessage = UIAlertController(title: "Alert", message: "No Response from api.themoviedb.org", preferredStyle: .alert)
+        apiError = UIAlertController(title: "Alert", message: "Error reading movie details", preferredStyle: .alert)
+        
+        // Create OK button with action handler
+        let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in return})
+        
+        //Add OK button to a dialog message
+        networkErrorMessage.addAction(ok)
+        apiError.addAction(ok)
 
         // Get the superhero movie data for movies that are similar to Wonder Women (id = 297762) from the API endpoints
         let url = URL(string: "https://api.themoviedb.org/3/movie/297762/similar?api_key=5766b4fa8a6980ba5b2e528f85f35b9f")!
@@ -41,7 +54,9 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
         let task = session.dataTask(with: request) { (dataFromNetworking, response, error) in
              // This will run when the network request returns
              if let error = error {
-                    print(error.localizedDescription)
+                self.present(self.networkErrorMessage, animated: true, completion: nil)
+                print(error.localizedDescription)
+                 
              } else if let dataFromNetworking = dataFromNetworking {
                  
                  do {
@@ -57,7 +72,7 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
                      
                  } catch {
                      // Couldn't read in the JSON data correctly
-                     print(error.localizedDescription)
+                     self.present(self.apiError, animated: true, completion: nil)
                  }
              }
         }

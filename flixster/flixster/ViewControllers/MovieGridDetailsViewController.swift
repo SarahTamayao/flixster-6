@@ -20,9 +20,10 @@ class MovieGridDetailsViewController: UIViewController, UIGestureRecognizerDeleg
     
     // MARK: - View Life Cycle
     
-//    var movieVideos = [[String: Any]]()
     var superHeroMovie: MovieDetails!
-    var dialogMessage: UIAlertController!
+    var noTrailerErrorMessage: UIAlertController!
+    var networkErrorMessage: UIAlertController!
+    var apiError: UIAlertController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,54 +41,27 @@ class MovieGridDetailsViewController: UIViewController, UIGestureRecognizerDeleg
         posterView.isUserInteractionEnabled = true
         
         // Create new Alert when no YouTube trailer found
-        dialogMessage = UIAlertController(title: "Alert", message: "No YouTube Trailer Found", preferredStyle: .alert)
+        noTrailerErrorMessage = UIAlertController(title: "Alert", message: "No YouTube Trailer Found", preferredStyle: .alert)
+        networkErrorMessage = UIAlertController(title: "Alert", message: "No Response from api.themoviedb.org", preferredStyle: .alert)
+        apiError = UIAlertController(title: "Alert", message: "Error reading movie details", preferredStyle: .alert)
+        
         
         // Create OK button with action handler
         let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in return})
         
         //Add OK button to a dialog message
-        dialogMessage.addAction(ok)
+        noTrailerErrorMessage.addAction(ok)
+        
     }
     
     // MARK: - IBActions
 
     @IBAction func posterTapped(_ sender: UITapGestureRecognizer) {
         // User tapped on the poster, get the trailer URL and send it during segue
-        let url = URL(string: "https://api.themoviedb.org/3/movie/\(superHeroMovie.movieID!)/videos?api_key=5766b4fa8a6980ba5b2e528f85f35b9f&language=en-US")!
-        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
-        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
-        let task = session.dataTask(with: request) { (dataFromNetworking, response, error) in
-             // This will run when the network request returns
-            if let error = error {
-                print(error.localizedDescription)
-            } else if let dataFromNetworking = dataFromNetworking {
-                
-                do {
-                    let dataDictionary = try JSON(data: dataFromNetworking)
-                    
-                    // Grab the first set of data from the API array and convert it into VideosForMovie model
-                    // Then, see if it contains a YouTube Trailer
-                    for setOfTrailerDetails in dataDictionary["results"] {
-                        let trailerDetails = VideosForMovie.init(json: setOfTrailerDetails.1)
-                        
-                        if trailerDetails.trailerSite == "YouTube" && trailerDetails.trailerType == "Trailer" {
-                            let movieTrailerURL = trailerDetails.movieLink!
-                            self.performSegue(withIdentifier: "segueToTrailerController", sender: movieTrailerURL)
-                            break
-                        }
-                    }
-                    
-                    // Present Alert since couldn't find a YouTube video
-                    self.present(self.dialogMessage, animated: true, completion: nil)
-                    
-                } catch {
-                    // Error in fetching the API endpoint data
-                    print(error.localizedDescription)
-                }
-            }
-        }
-        task.resume()
         
+        // Following function is a UIViewController extension
+        grabYouTubeTrailerURLandSegue("segueToTrailerController", superHeroMovie.movieID!, self.noTrailerErrorMessage, self.apiError, self.networkErrorMessage)
+                
     }
     
     // MARK: - Navigation, prepare for segue

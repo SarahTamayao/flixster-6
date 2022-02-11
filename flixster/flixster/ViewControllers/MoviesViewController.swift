@@ -19,9 +19,22 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     // MARK: - View Life Cycle
     
     var movies = [MovieDetails]()
+    var networkErrorMessage: UIAlertController!
+    var apiError: UIAlertController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Create new Alerts with network error and API data error
+        networkErrorMessage = UIAlertController(title: "Alert", message: "No Response from api.themoviedb.org", preferredStyle: .alert)
+        apiError = UIAlertController(title: "Alert", message: "Error reading movie details", preferredStyle: .alert)
+        
+        // Create OK button with action handler
+        let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in return})
+        
+        //Add OK button to a dialog message
+        networkErrorMessage.addAction(ok)
+        apiError.addAction(ok)
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -33,7 +46,8 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         let task = session.dataTask(with: request) { (dataFromNetworking, response, error) in
              // This will run when the network request returns
              if let error = error {
-                    print(error.localizedDescription)
+                 self.present(self.networkErrorMessage, animated: true, completion: nil)
+                 print(error.localizedDescription)
              } else if let dataFromNetworking = dataFromNetworking {
                  
                  do {
@@ -46,7 +60,8 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                      self.tableView.reloadData()
                      
                  } catch {
-                     print(error.localizedDescription)
+                     // Couldn't read in the JSON data correctly
+                     self.present(self.apiError, animated: true, completion: nil)
                  }
              }
         }

@@ -55,4 +55,3 @@ struct VideosForMovie {
         movieLink = URL(string: "https://www.youtube.com/watch?v=" + self.trailerKey!)
     }
 }
-
