@@ -17,7 +17,7 @@ class MovieDetailsViewController: UIViewController {
     @IBOutlet weak var backdropView: UIImageView!
     @IBOutlet weak var posterView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var synopsisLabel: UILabel!
+    @IBOutlet weak var synopsisText: UITextView!
     
     // MARK: - View Life Cycle
     
@@ -26,6 +26,7 @@ class MovieDetailsViewController: UIViewController {
     var networkErrorMessage: UIAlertController!
     var apiError: UIAlertController!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,7 +34,7 @@ class MovieDetailsViewController: UIViewController {
         let synopsis = movie.synopsis!
         
         titleLabel.text = title
-        synopsisLabel.text = synopsis
+        synopsisText.text = synopsis
 
         backdropView.af.setImage(withURL: movie.backDropURL!)
         posterView.af.setImage(withURL: movie.posterURL!)
@@ -75,8 +76,9 @@ class MovieDetailsViewController: UIViewController {
             let movieTrailerViewController = segue.destination as! MovieTrailerViewController
             movieTrailerViewController.trailerURL = trailerURL
         }
+        
     }
-    
+  
     
     
 }

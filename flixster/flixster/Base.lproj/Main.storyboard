@@ -123,34 +123,37 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HiA-VJ-ueo">
-                                <rect key="frame" x="10" y="472" width="394" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="tag-1F-TLJ">
+                                <rect key="frame" x="0.0" y="472" width="414" height="341"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4Xe-v1-erL"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="HiA-VJ-ueo" firstAttribute="leading" secondItem="4Xe-v1-erL" secondAttribute="leading" constant="10" id="Pa5-yG-krS"/>
+                            <constraint firstAttribute="trailing" secondItem="tag-1F-TLJ" secondAttribute="trailing" id="PNY-jE-RPs"/>
+                            <constraint firstItem="tag-1F-TLJ" firstAttribute="leading" secondItem="4Xe-v1-erL" secondAttribute="leading" id="VeL-h2-jP9"/>
+                            <constraint firstItem="tag-1F-TLJ" firstAttribute="bottom" secondItem="4Xe-v1-erL" secondAttribute="bottom" id="WN1-j6-QaB"/>
                             <constraint firstItem="4Xe-v1-erL" firstAttribute="trailing" secondItem="Oy2-KX-xTI" secondAttribute="trailing" constant="20" id="d6q-gq-h3s"/>
                             <constraint firstItem="yTK-zi-uku" firstAttribute="top" secondItem="4Xe-v1-erL" secondAttribute="top" id="dH2-ox-RRy"/>
+                            <constraint firstItem="tag-1F-TLJ" firstAttribute="top" secondItem="lCr-bt-Wi3" secondAttribute="bottom" constant="8" symbolic="YES" id="fHa-2j-3mw"/>
                             <constraint firstItem="Oy2-KX-xTI" firstAttribute="top" secondItem="yTK-zi-uku" secondAttribute="bottom" constant="8" symbolic="YES" id="frN-Nq-ZdE"/>
                             <constraint firstItem="yTK-zi-uku" firstAttribute="trailing" secondItem="4Xe-v1-erL" secondAttribute="trailing" id="hdL-CS-ohx"/>
                             <constraint firstItem="lCr-bt-Wi3" firstAttribute="top" secondItem="4Xe-v1-erL" secondAttribute="top" constant="228" id="kLI-is-X64"/>
                             <constraint firstItem="yTK-zi-uku" firstAttribute="leading" secondItem="4Xe-v1-erL" secondAttribute="leading" id="lM6-iS-dIL"/>
                             <constraint firstItem="lCr-bt-Wi3" firstAttribute="leading" secondItem="4Xe-v1-erL" secondAttribute="leading" constant="10" id="lmy-GJ-B2n"/>
                             <constraint firstItem="Oy2-KX-xTI" firstAttribute="leading" secondItem="lCr-bt-Wi3" secondAttribute="trailing" constant="8" id="mdt-is-GCy"/>
-                            <constraint firstItem="HiA-VJ-ueo" firstAttribute="top" secondItem="lCr-bt-Wi3" secondAttribute="bottom" constant="8" symbolic="YES" id="tKx-ZM-9Tz"/>
-                            <constraint firstItem="4Xe-v1-erL" firstAttribute="trailing" secondItem="HiA-VJ-ueo" secondAttribute="trailing" constant="10" id="xdc-jm-of4"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Details" id="cdJ-ff-auT"/>
                     <connections>
                         <outlet property="backdropView" destination="yTK-zi-uku" id="Y6N-gj-Sev"/>
                         <outlet property="posterView" destination="lCr-bt-Wi3" id="Ik5-zF-Zna"/>
-                        <outlet property="synopsisLabel" destination="HiA-VJ-ueo" id="Y3D-Ui-GxP"/>
+                        <outlet property="synopsisText" destination="tag-1F-TLJ" id="FtL-Pz-Pzy"/>
                         <outlet property="titleLabel" destination="Oy2-KX-xTI" id="9kZ-mW-zFB"/>
                         <segue destination="g1c-uH-TA0" kind="presentation" identifier="segueFromMovieDetails" id="koL-18-Ihr"/>
                     </connections>
@@ -162,7 +165,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1651" y="-490"/>
+            <point key="canvasLocation" x="1650.7246376811595" y="-490.17857142857139"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Xbq-Ao-njs">
@@ -357,7 +360,7 @@
         <!--Now Playing-->
         <scene sceneID="7Zp-xH-e1x">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Eoz-28-u8Y" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" interfaceStyle="light" id="Eoz-28-u8Y" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Now Playing" image="now_playing_tabbar_item" id="GcX-sM-6HV"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="XD5-sd-EQz">
